@@ -14,12 +14,13 @@ enum CategoryAlertType {
 }
 class SettingsViewController: UIViewController {
     
-    
+    // MARK: Outtlet's
     @IBOutlet weak var tfDolar: UITextField!
     @IBOutlet weak var tfIosValue: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    var OkButton: UIAlertAction!
     
+    
+    var OkButton: UIAlertAction!
     var fetchedResultController: NSFetchedResultsController<StateTax>!
     var stateTax: StateTax!
     var dataSource: [StateTax] = []
@@ -28,7 +29,8 @@ class SettingsViewController: UIViewController {
     var lettersValidation2: [Character] = []
     var count1: Int = 0
     var count2: Int = 0
-
+    
+    // MARK: Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,17 +52,34 @@ class SettingsViewController: UIViewController {
         tfIosValue.inputAccessoryView = toolbar
         tfDolar.inputAccessoryView = toolbar
         
-        if let dolar = UserDefaults.standard.string(forKey: "dolar"){
+        if let dolar = UserDefaults.standard.string(forKey: SettingsType.dolar.rawValue){
             tfDolar.text = dolar
         }
         
-        if let iof = UserDefaults.standard.string(forKey: "iof"){
+        if let iof = UserDefaults.standard.string(forKey: SettingsType.iof.rawValue){
             
             tfIosValue.text = iof
         }
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        if (tfDolar.text == "") || (tfIosValue.text == ""){
+            
+            UserDefaults.standard.set("1", forKey: SettingsType.dolar.rawValue)
+            UserDefaults.standard.set("0", forKey: SettingsType.iof.rawValue)
+            
+        }else{
+            UserDefaults.standard.set(tfDolar.text, forKey: SettingsType.dolar.rawValue)
+            UserDefaults.standard.set(tfIosValue.text, forKey: SettingsType.iof.rawValue)
+        }
+        
+        
+    }
+    
+    // MARK: Methods
     func donePrice(){
         tfDolar.resignFirstResponder()
         tfIosValue.resignFirstResponder()
@@ -78,24 +97,7 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
 
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        
-        if (tfDolar.text == "") || (tfIosValue.text == ""){
-  
-            UserDefaults.standard.set("1", forKey: SettingsType.dolar.rawValue)
-            UserDefaults.standard.set("0", forKey: SettingsType.iof.rawValue)
-            
-        }else{
-            UserDefaults.standard.set(tfDolar.text, forKey: SettingsType.dolar.rawValue)
-            UserDefaults.standard.set(tfIosValue.text, forKey: SettingsType.iof.rawValue)
-        }
-
-        
-    }
-  
     
-    // MARK: Mehotds
     func loadStateTax(){
         
         let fetchRequest: NSFetchRequest<StateTax> = StateTax.fetchRequest()
@@ -114,7 +116,8 @@ class SettingsViewController: UIViewController {
         }
 
     }
-
+    
+    // MARK: Actions
     @IBAction func addStateTax(_ sender: UIButton?) {
         count1 = 0
         count2 = 0
@@ -189,7 +192,7 @@ class SettingsViewController: UIViewController {
 }
 
 
-    // MARK: Extensions
+    // MARK: Extension UITableViewDelegate, UITableViewDataSource
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -254,13 +257,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
+
+    // MARK: Extension NSFetchedResultsControllerDelegate
 extension SettingsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
 
 }
-
+    // MARK: Extension UITextFieldDelegate
 extension SettingsViewController: UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

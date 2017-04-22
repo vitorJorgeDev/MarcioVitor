@@ -4,9 +4,11 @@ import CoreData
 
 class ProductsTableViewController: UITableViewController {
     
+    
     var fetchedResultController: NSFetchedResultsController<Product>!
     var label: UILabel!
-
+    
+    // MARK: Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +56,7 @@ class ProductsTableViewController: UITableViewController {
     }
     
 
-    // MARK: - Table view data source
-
+    // MARK: - Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
      
         return 1
@@ -108,7 +109,7 @@ class ProductsTableViewController: UITableViewController {
 
 }
 
-
+    // MARK: Extension NSFetchedResultsControllerDelegate
 extension ProductsTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()

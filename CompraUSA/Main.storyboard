@@ -441,7 +441,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAv-UE-lmq" customClass="BotaoPersonalizado" customModule="CompraUSA" customModuleProvider="target">
-                                <rect key="frame" x="120.5" y="481" width="80" height="30"/>
+                                <rect key="frame" x="120" y="481" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.063695438206195831" green="0.70332014560699463" blue="0.9623686671257019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="jyt-aI-gIF"/>

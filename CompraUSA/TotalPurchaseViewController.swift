@@ -11,7 +11,7 @@ class TotalPurchaseViewController: UIViewController {
     var dataSource: [Product]!
 
     
-    // MARK - System Class
+    // MARK - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,7 +88,7 @@ class TotalPurchaseViewController: UIViewController {
         }
     }
 
-    
+    // MARk: Methods
     func loadMovies() {
         
         let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()

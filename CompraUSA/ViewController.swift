@@ -4,7 +4,7 @@ import CoreData
 
 @available(iOS 10.0, *)
 class ViewController: UIViewController {
-
+    // MARK: Outlet
     @IBOutlet weak var tfProductName: UITextField!
     @IBOutlet weak var tfStatePurchase: UITextField!
     @IBOutlet weak var tfPrice: UITextField!
@@ -20,8 +20,9 @@ class ViewController: UIViewController {
     var pickerView: UIPickerView!
     var fetchedResultControllerStateTax: NSFetchedResultsController<StateTax>!
     var dataSource: [StateTax]!
+    var verification: Bool!
 
-    // MARK: SUPER CLASSES
+    // MARK: Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,6 +71,7 @@ class ViewController: UIViewController {
       
         
         loadStateTax()
+        verification = false
         
         
     }
@@ -105,6 +107,7 @@ class ViewController: UIViewController {
 
     func cancel() {
         tfStatePurchase.resignFirstResponder()
+        verification = false
     }
     
     func done() {
@@ -113,16 +116,16 @@ class ViewController: UIViewController {
             tfStatePurchase.text = dataSource[pickerView.selectedRow(inComponent: 0)].name
         }
       
-        cancel()
+        tfStatePurchase.resignFirstResponder()
     }
     func donePrice(){
         
         tfPrice.resignFirstResponder()
         
     }
-
+    
+    // MARK: Actions
     @IBAction func RegisterProduct(_ sender: UIButton) {
-        
         
         if tfProductName.text == "" || tfPrice.text == "" || tfStatePurchase.text == "" || smallImage == nil{
            showAlert()
@@ -141,11 +144,12 @@ class ViewController: UIViewController {
                 product.image = smallImage
             }
             
-            if dataSource.count != 0 {
+            if verification == true{
+                if dataSource.count != 0 {
                 product.stateTax = (dataSource[pickerView.selectedRow(inComponent: 0)])
+                }
             }
-            
-            
+
             do {
                 try context.save()
             } catch {
@@ -153,7 +157,6 @@ class ViewController: UIViewController {
             }
 
             _ = navigationController?.popViewController(animated: true)
-
         }
 
     }
@@ -198,6 +201,7 @@ class ViewController: UIViewController {
 
 }
 
+    // MARK: Extension UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
@@ -215,15 +219,23 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 }
 
+    // Extension UIPickerViewDelegate
 extension ViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
         return dataSource[row].name
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       
+        verification = true
+      
+    }
 
 }
 
 
+    // Extension UIPickerViewDataSource
 extension ViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -236,7 +248,7 @@ extension ViewController: UIPickerViewDataSource {
         return 0
     }
 }
-
+    // Extension UITextFieldDelegate
 extension ViewController: UITextFieldDelegate{
   
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
