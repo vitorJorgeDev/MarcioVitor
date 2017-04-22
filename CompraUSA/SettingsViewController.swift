@@ -167,7 +167,7 @@ class SettingsViewController: UIViewController {
                 let string: String = String(self.stateTax.tax)
                 let characters = Array(string.characters)
                 self.lettersValidation2 = characters
-                self.count2 = characters.count      //Array(string.characters).count
+                self.count2 = characters.count      
             }
             textField.placeholder = "Insira o valor da taxa"
             textField.keyboardType = .decimalPad
@@ -246,13 +246,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
         }
 
     }
-    //
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         stateTax = fetchedResultController.object(at: indexPath)
         addStateTax(nil)
     }
-    //
+    
 }
 extension SettingsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

@@ -31,14 +31,26 @@ class TotalPurchaseViewController: UIViewController {
 
             let dataSource = fetchedResultController.fetchedObjects
           
-  
+         
             if let dolar = UserDefaults.standard.string(forKey: SettingsType.dolar.rawValue){
-                dolar2 = Double(dolar)!
+                
+                if let dolarDouble = Double(dolar) {
+                    dolar2 = dolarDouble
+                    
+                } else{
+                    dolar2 = 0
+                }
+                
             }
             
             if let iof = UserDefaults.standard.string(forKey: SettingsType.iof.rawValue){
                 
-                iof2 = Double(iof)
+                if let iofDouble = Double(iof){
+                    iof2 = iofDouble
+                }else{
+                    iof2 = 0
+                }
+                
             }
 
             if let count = dataSource?.count{
