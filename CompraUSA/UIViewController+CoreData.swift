@@ -1,3 +1,9 @@
+/*
+ ***************************************
+ Developed by
+ Marcio Paulo Soares Oliveira RM 31382
+ Vitor Cesar Hideo Jorge      RM 31624
+ */
 
 import CoreData
 import UIKit

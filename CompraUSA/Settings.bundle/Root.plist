@@ -19,6 +19,8 @@
 			<string>Cotação do dolár</string>
 			<key>Key</key>
 			<string>dolar</string>
+			<key>KeyboardType</key>
+			<string>NumbersAndPunctuation</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -27,6 +29,8 @@
 			<string>I.O.F(%)</string>
 			<key>Key</key>
 			<string>iof</string>
+			<key>KeyboardType</key>
+			<string>NumbersAndPunctuation</string>
 		</dict>
 		<dict/>
 	</array>

@@ -1,3 +1,9 @@
+/*
+***************************************
+Developed by 
+Marcio Paulo Soares Oliveira RM 31382
+Vitor Cesar Hideo Jorge      RM 31624
+*/
 
 import UIKit
 import CoreData
@@ -145,8 +151,7 @@ class ViewController: UIViewController {
                 product.image = smallImage
             }
             
-            print(verification)
-            
+                    
             if verification == true{
                 if dataSource.count != 0 {
                 product.stateTax = (dataSource[pickerView.selectedRow(inComponent: 0)])
