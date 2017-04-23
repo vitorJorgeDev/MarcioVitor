@@ -107,16 +107,17 @@ class ViewController: UIViewController {
 
     func cancel() {
         tfStatePurchase.resignFirstResponder()
-        verification = false
+        
     }
     
     func done() {
+        verification = true
        
         if dataSource.count != 0{
             tfStatePurchase.text = dataSource[pickerView.selectedRow(inComponent: 0)].name
         }
       
-        tfStatePurchase.resignFirstResponder()
+        cancel()
     }
     func donePrice(){
         
@@ -143,6 +144,8 @@ class ViewController: UIViewController {
             if smallImage != nil {
                 product.image = smallImage
             }
+            
+            print(verification)
             
             if verification == true{
                 if dataSource.count != 0 {
@@ -224,12 +227,6 @@ extension ViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
         return dataSource[row].name
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       
-        verification = true
-      
     }
 
 }
